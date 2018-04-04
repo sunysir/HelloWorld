@@ -1,0 +1,11 @@
+---
+layout:     post
+title:      "杂记"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-03-06 12:00:00
+author:     "index2.5.html"
+catalog: true
+categories: book
+tags:
+    - 笔记
+---

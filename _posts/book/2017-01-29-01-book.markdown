@@ -1,0 +1,11 @@
+---
+layout:     post
+title:      "java编程思想学习笔记"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-01-01 12:00:00
+author:     "index2.1.html"
+catalog: true
+categories: book
+tags:
+    - 笔记
+---

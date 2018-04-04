@@ -1,0 +1,111 @@
+---
+layout:     post
+title:      "二叉树节点最小绝对值差值计算"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-04-01 11:00:00
+author:     "suny"
+catalog: true
+categories: Leetcode
+tags:
+    - 笔记
+---
+
+---
+
+<img src="/img/Minimum_Absolute_Difference.jpg"/>
+<br></br>
+### **原理就是首先创建二叉树，前中后序遍历都可以，然后存入列表，将列表排序，然后遍历列表并相邻的元素比较大小，找出最小元素并返回。**
+
+python代码
+
+	# Definition for a binary tree node.
+	#创建一个节点
+	class TreeNode:
+	     def __init__(self, x):
+	         self.val = x
+	         self.left = None
+	         self.right = None
+	
+	class Solution:
+	    def __init__(self, list1):
+	        self.list1 = list1
+        
+	    #前序遍历二叉树并存入列表list1中
+	    def preorder(self, root):
+	        self.list1.append(root.val)
+	        if root.left != None:
+	            self.preorder(root.left)
+	        if root.right != None:
+	            self.preorder(root.right)
+	        return 
+	    #交换函数
+	    def change(self,arr, a, b):
+	        temp = arr[a]
+	        arr[a] = arr[b]
+	        arr[b] = temp
+	        
+	    def getMinimumDifference(self, root):
+	        min = 4294967296
+	        
+	        self.preorder(root)
+	        #简单的排序 一步sorted()就可以解决
+	        for i in range(len(self.list1)-1):
+	            for j in range(i, len(self.list1)-i-1):
+	                if self.list1[j] > self.list1[j+1]:
+	                    self.change(self.list1, j, j+1)
+	        #遍历列表中的数并相邻比较
+	        for i in range(len(self.list1)-1):
+	                temp = abs(self.list1[i]-self.list1[i+1]) 
+	                if min > temp:
+	                    min = temp
+	        return min
+	            
+	           
+	
+	
+	def stringToTreeNode(input):
+	    input = input.strip()
+	    input = input[1:-1]
+	    if not input:
+	        return None
+	
+	    inputValues = [s.strip() for s in input.split(',')]
+	    root = TreeNode(int(inputValues[0]))
+	    nodeQueue = [root]
+	    front = 0
+	    index = 1
+	    while index < len(inputValues):
+	        node = nodeQueue[front]
+	        front = front + 1
+	
+	        item = inputValues[index]
+	        index = index + 1
+	        if item != "null":
+	            leftNumber = int(item)
+	            node.left = TreeNode(leftNumber)
+	            nodeQueue.append(node.left)
+	
+	        if index >= len(inputValues):
+	            break
+	
+	        item = inputValues[index]
+	        index = index + 1
+	        if item != "null":
+	            rightNumber = int(item)
+	            node.right = TreeNode(rightNumber)
+	            nodeQueue.append(node.right)
+	    return root
+	
+	def main():
+	    #list1开始设的局部变量改成了全局变量
+	    list1 = []
+	    while True:
+	         s = Solution(list1)
+	         root = stringToTreeNode(input())
+	         min =  s.getMinimumDifference(root)
+	         print(min)
+	         list1 = []
+	
+	if __name__ == '__main__':
+	    main()
+	        

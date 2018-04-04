@@ -1,0 +1,12 @@
+---
+layout: default
+---
+{% for context in site.categories.book %}
+	<a href= {{context.author}} style="text-decoration: none;"><div class="context">
+		<div style="width: 100%;height: 30px;"></div>
+		<div class="context1" id="config">
+				<span style="color: black; font-size:larger;"><b>{{context.title}}</b></span>
+		</div>
+	</div></a>
+	<div style="width: 100%;height: 15px;"></div>
+{% endfor %}	

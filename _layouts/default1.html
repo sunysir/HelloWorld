@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>suny的博客</title>
+	</head>
+	<style>
+		#father{
+			background-color: whitesmoke ;
+			background-repeat: no-repeat;
+			width: 100vw;
+			height: auto;
+			background-size: cover;
+			margin: auto;
+		}
+		#one{
+			width: 1050px;
+			height: 231px;
+			/*border: 1px solid black;*/
+			margin: auto;
+		}
+		#two{
+			width: 1050px;
+			height: auto;
+			margin: auto;
+			background-color: white;
+			background-size: cover;
+			padding-left: -50px;
+		}
+		.one1{
+			width: 1050px;
+			height: 77px;
+			/*border: 1px solid black;*/
+			margin: auto;
+		}
+		#two1{
+			width: 800px;
+			height: auto;
+			/*border: 1px solid black;*/
+			margin: auto;
+		}
+		.context{
+			width: 800px;
+			height: 180px;
+			margin: auto;
+			background-color: whitesmoke;
+		}
+		.context1{
+			width: 700px;
+			height: 120px;
+			margin: auto;
+			/*border: 1px solid black;*/
+			margin: auto;
+		}
+		#config{
+			font-family: Hiragino Sans GB; mononoki, sans-serif;
+			font-size: 16px;
+			line-height: 2em;
+			word-spacing: 4px;
+			letter-spacing: 1.75px;
+		}
+	</style>
+	<body id="father">
+		{% include header.html %}
+		<div id="two">
+			<div style="width: 100%;height: 45px;"></div>
+			<div id="two1">
+				{{content}}	
+			</div>
+	</body>
+</html>

@@ -1,0 +1,240 @@
+---
+layout:     post
+title:      "二叉树的创建及三种遍历方法"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-03-15 20:16:00
+author:     "suny"
+catalog: true
+categories: Algorithms
+tags:
+    - 笔记
+---
+# 二叉树创建
+##二叉树定义
+**二叉树是每个节点最多有两个子树的树结构。 通常子树被称作“左子树”和“右子树”。 二叉树常被用于实现二叉查找树和二叉堆。 二叉树的每个结点至多只有二棵子树(不存在度大于2的结点)，二叉树的子树有左右之分，次序不能颠倒。**
+
+>**创建二叉树，首先要创建一个节点Node，根节点中存放三个数据，一个节点值，一个左子树，一个右子树，创建过程中把节点分别赋予左右子树，使其成为子节点，而后在递归使每个子节点变成二级根节点，C语言中是把节点放到结构体中，而面向对象语言是通过类创建节点**
+
+
+
+
+
+python代码
+
+	#创建二叉树
+	class Node(object):
+	    def __init__(self, v = None, l = None, r = None):
+	        self.value = v
+	        self.leftC = l
+	        self.rightC = r
+	
+		def creatBinTree(root):
+		    val = input("")
+		    if val == "#":
+		        root = None
+		    else:
+		        root = Node(v = val)
+		        print("请输入%s的左子节点的值："%root.value, end="")
+		        root.leftC = creatBinTree(root.leftC)
+		        print("请输入%s的右子节点的值：" %root.value, end="")
+		        root.rightC = creatBinTree(root.rightC)
+		    return root
+		
+		#前序遍历二叉树
+		
+		def preorder(root):
+		    if root == None:
+		        return
+		    else:
+		        print(root.value, end="")
+		        if root.leftC == None:
+		            pass
+		        else:
+		            preorder(root.leftC)
+		        if root.rightC == None:
+		            pass
+		        else:
+		            preorder(root.rightC)
+	
+	#中序遍历二叉树
+	
+	def inorder(root):
+	    if root == None:
+	        return
+	    else:
+	        if root.leftC == None:
+	            pass
+	        else:
+	            inorder(root.leftC)
+	        print(root.value, end="")
+	        if root.rightC == None:
+	            pass
+	        else:
+	            inorder(root.rightC)
+	
+	#中序遍历二叉树
+	
+	def postorder(root):
+	    if root == None:
+	        return
+	    else:
+	        if root.leftC == None:
+	            pass
+	        else:
+	            postorder(root.leftC)
+	        if root.rightC == None:
+	            pass
+	        else:
+	            postorder(root.rightC)
+	        print(root.value, end="")
+	
+	# root = None
+	# print("请输入根节点的值：",end="")
+	# root = creatBinTree(root)
+	# preorder(root)
+	
+	root = None
+	print("请输入根节点的值：",end="")
+	root = creatBinTree(root)
+	inorder(root)
+
+
+C语言代码
+	
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include <string.h>
+	
+	
+	typedef struct BiTree
+	{
+		char data;
+		struct BiTree *lchild;
+		struct BiTree *rchild;
+	}Bitree, *pBitree;
+	
+	
+	////////创建二叉树/////////
+	int CreateBiTree(pBitree *T)  
+	{  
+		char val;
+		
+		scanf("%c", &val);
+		getchar();
+		if(val == '#')
+		{
+			(*T) = NULL;
+			return 0;
+		}
+		else  
+	    {  
+	        (*T) = (pBitree)malloc(sizeof(Bitree));  
+	        if ((*T) == NULL)  
+	        {  
+	            printf("failed\n");  
+	            return 0;  
+	        }  
+	        else 
+			{
+				(*T)->data = val;
+				printf("请输入%c左子节点数据:", val);
+				CreateBiTree(&((*T)->lchild));
+				printf("请输入%c右子节点数据:", val);
+				CreateBiTree(&(*T)->rchild);
+			}
+		}
+		
+		return 1;
+	  
+	} 
+	
+	////////前序遍历二叉树/////////
+	void PreOrderBiTree(pBitree T)
+	{
+		char VAL;
+		
+		if(T == NULL)
+		{
+			return;
+		}
+		else
+		{
+		
+			VAL = T->data;
+			printf("%c ", VAL);
+			PreOrderBiTree(T->lchild);
+			PreOrderBiTree(T->rchild);
+		}
+	
+	}
+	
+	////////中序遍历二叉树/////////
+	void MidOrderBiTree(pBitree T)
+	{
+		char VAL;
+		
+		if(T == NULL)
+		{
+			return;
+		}
+		else
+		{
+			MidOrderBiTree(T->lchild);
+			VAL = T->data;
+			printf("%c ", VAL);
+			MidOrderBiTree(T->rchild);
+		}
+	}
+	
+	
+	
+	
+	////////后序遍历二叉树/////////
+	void BackOrderBiTree(pBitree T)
+	{
+		char VAL;
+		
+		if(T == NULL)
+		{
+			return;
+		}
+		else
+		{
+			BackOrderBiTree(T->lchild);	
+			BackOrderBiTree(T->rchild);
+			VAL = T->data;
+			printf("%c ", VAL);
+		}
+	}
+	
+	
+	int main(void)
+	{
+		pBitree Tnode;
+		Tnode = (pBitree)malloc(sizeof(Bitree));
+		pBitree *p = &Tnode;//结构体扩容内存指针Tnode存放的是结构体 相当于char *p = "123"  char**pp = &p printf("%s", *pp)
+		printf("请输入二叉树头结点存放的数据 :");
+	
+		CreateBiTree(p);		
+	
+	
+		printf("正序遍历二叉树结果为 :");
+		PreOrderBiTree(Tnode);
+		printf("\n");
+	
+	
+		printf("中序遍历二叉树结果为 :");
+		MidOrderBiTree(Tnode);
+		printf("\n");
+	
+	
+		printf("后序遍历二叉树结果为 :");
+		BackOrderBiTree(Tnode);
+		printf("\n");
+		
+		
+		return 0;
+	}
+	
+	
+	
