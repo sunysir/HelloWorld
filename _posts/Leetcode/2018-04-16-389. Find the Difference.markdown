@@ -1,0 +1,48 @@
+---
+layout:     post
+title:      "389. Find the Difference"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-04-16 16:48:00
+author:     "suny"
+catalog: true
+categories: Leetcode
+tags:
+    - 笔记
+---
+<img src="/img/FindtheDifference.jpg"/>
+
+
+
+思路: 创建一个字典把s字符串存入字典，值都1，在遍历t，片段t中字符是否在字典中，不在则返回，在的话就值减，当值为0的时候，说明这个字符是多余的重复字符，则返回。
+
+python代码  (40 ms Your runtime beats 96.76 % of python3 submissions)
+			
+		class Solution:
+		    def findTheDifference(self, s, t):
+		        """
+		        :type s: str
+		        :type t: str
+		        :rtype: str
+		        """
+		        dict1 = {}
+				#将S字符串存入字典
+		        for i in s:
+		            if i not in dict1:
+		                dict1[i] = 1
+		            else:
+		                dict1[i] += 1
+				#对重复或者不同的字符进行判断
+		        for i in t:
+		            if i not in dict1:
+		                return i
+		            else:
+		                if dict1[i] == 0:
+		                    return i
+		                dict1[i]-=1
+
+
+
+	
+	
+
+

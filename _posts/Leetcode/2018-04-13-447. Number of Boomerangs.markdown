@@ -1,0 +1,45 @@
+---
+layout:     post
+title:      "447. Number of Boomerangs"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-04-13 15:48:00
+author:     "suny"
+catalog: true
+categories: Leetcode
+tags:
+    - 笔记
+---
+<img src="/img/NumberofBoomerangs.jpg"/>
+
+思路: 回旋镖这道题，主要思路就是全遍历，得到每两个坐标之间的距离，将每个坐标点与其他点都距离存在字典中，距离相等的就计数加一，然后就是排列组合，<font size = 4>C</font>2 -->n(n-1)
+		   --------------------- N  -->
+
+python代码  （1883ms）
+
+
+	class Solution(object):
+    def numberOfBoomerangs(self, points):
+        """
+        :type points: List[List[int]]
+        :rtype: int
+        """
+        count = 0;
+        for x0,y0 in points:
+            dict1 = {}
+            for x1,y1 in points:
+                if x0 == x1 and y0 == y1:
+                    continue
+                ran = str(int(abs(x0-x1)**2+abs(y0-y1)**2))
+                if ran in dict1:
+                    dict1[ran] += 1
+                else:
+                    dict1[ran] = 1
+            for key in dict1:
+                count += dict1[key]*(dict1[key]-1)
+        return count
+
+
+	
+	
+
+

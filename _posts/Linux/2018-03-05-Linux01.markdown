@@ -7,7 +7,7 @@ author:     "suny"
 catalog: true
 categories: Linux
 tags:
-    - 生活
+    - 笔记
 ---
 
 

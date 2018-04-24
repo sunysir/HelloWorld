@@ -197,6 +197,22 @@ sort函数
 
 	list.sort()#对列表进行排序
 	list2 = sort(list, key = func, reverse = True)#函数属性可以自行编写  reverse为True则对列表进行翻转排序
+
+strip()函数
+
+去掉字符串首尾指定字符  默认为空白字符空格回车制表符等等  [\f\n\r\t]
+
+	a = "\tiamsuny! i am a good man!"
+	print(a)
+	a = a.strip()
+	print(a)
+	a = a.strip("!")
+	print(a)
+	>>>	        iamsuny! i am a good man!
+		iamsuny! i am a good man!
+		iamsuny! i am a good man
+
+	
 	
 	
 

@@ -1,0 +1,56 @@
+---
+layout:     post
+title:      "515. Find Largest Value in Each Tree Row"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-04-14 16:48:00
+author:     "suny"
+catalog: true
+categories: Leetcode
+tags:
+    - 笔记
+---
+<img src="/img/Sum of Left Leaves.jpg"/>
+
+
+
+思路: 核心思想广度优先遍历，创建个队列存放节点实现广度优先遍历，创建二维列表对每层值的左子树进行标记（这里的左子树是没有左右子树的绝对左子树）进行标记，最后分别判断它们的总和。
+
+python代码
+			
+		class TreeNode:
+		    def __init__(self, x):
+		        self.val = x
+		        self.left = None
+		        self.right = None
+		
+		class Solution:
+		    def sumOfLeftLeaves(self, root):
+		        if root == None:
+		            return 0
+		        total = 0
+		        list1 = [];list2 = []
+		        list1.append([root,0])
+		        while len(list1) != 0:
+		            r = list1[0][0]
+		            f = list1[0][1]
+		            list2.append([f, r.val])
+		            list1.pop(0)
+		            if r.left != None:
+		                if r.left.left == None and r.left.right == None:
+		                    list1.append([r.left,1])
+		                else:
+		                    list1.append([r.left,0])
+		            if r.right != None:
+		                list1.append([r.right,0])
+		        for i in list2:
+		            if i[0] == 1:
+		                total += i[1]
+		        return total
+            
+
+
+
+	
+	
+
+

@@ -1,0 +1,190 @@
+---
+layout:     post
+title:      "MongoDB01"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-04-10 11:00:00
+author:     "suny"
+catalog: true
+categories: MySQL
+tags:
+    - 笔记
+---
+
+
+
+安装完后为了方便先把MongoDB的bin目录路径设置为全局变量
+
+
+开启服务器
+
+	mongod --dbpath=d:\MondoDB\data\db
+
+开启客户端
+
+	mongo
+
+显示所有数据库
+
+	show dbs
+
+断开连接
+
+	exit
+
+帮助命令
+
+	help
+
+#### 创建数据库
+
+使用use+数据库名就会创建数据库,但必须要插入数据才能真正的创建
+
+	use test
+	#插入数据#同时创建了数据库和一个集合
+	db.test.insert(字典)  #其中test为集合名 
+
+#### 删除和查看数据库
+
+	#先进入数据库
+	use 数据库名
+
+	#删除数据库
+	db.test.dropDatabase()
+
+	#查看数据库名
+	db.getName()
+
+#### 集合操作
+
+- 显示所有集合
+		
+		show collections()
+
+- 创建一个集合
+
+		db.集合名.insert(数据(类似于字典))  
+
+- 创建空集合
+
+		db.createDatebase("集合名")
+
+- 删除集合
+
+		db.集合名.drop()
+
+#### 文档的操作
+
+- insert插入数据
+
+	- 插入单条数据
+	 
+			db.集合名.insert(数据)
+
+	- 插入多条数据
+	
+			db.集合名.insert(数据1，数据2，数据3...)
+	
+	- 查询集合数据
+
+			db.集合名.find()
+
+- save插入数据
+
+	- 与insert类似，直接插入
+
+		db.集合名.save(数据)
+
+	- 更新已有的
+
+			"_id" : ObjectId("5ad44c1390378433e1a29dbe"), 
+	    	"name" : "zd", 
+	    	"age" : 20.0
+	
+			把哈希码复制过来删掉key上面的引号直接对已有数据进行修改 "_id" 去掉引号 __id
+
+- 文档更新操作
+
+	语法格式：
+		
+		db.集合名.update(
+			{条件语句}，相当于sql中WHERE后面
+			{upset($set/$inc)：{需要修改的数据}}，
+			{multi:false/true}
+
+		)
+
+		$inc在原有基础上累加
+		$set直接修改
+		false(默认)修改一条
+		true修改多条数据
+
+- 文档删除
+
+	语法格式：
+		db.集合名.remove({}) #清空集合所有
+
+		db.集合名.remove(
+			{条件语句}，
+			{justOne:1/-1}默认为flase -1
+		)
+
+- 文档查询
+		#查询所有
+		db.集合名.find(
+			{},
+			{key:1/0} #1表示显示 0表示不显示
+		)
+		db.student.find(
+			{},
+			{name:1,age:1}
+		)
+		#查询一条
+		db.集合名.findOne(
+			{},
+			{key:1/0} #1表示显示 0表示不显示
+		)
+		#json格式化
+		db.集合名.find().pretty()
+
+- 条件查询
+	
+		db.集合名.find(age:{$gt:20})  #年龄大于20 greater than
+		db.集合名.find(age:{$gte:20}) #年龄大于等于20 gt equal 
+		db.集合名.find(age:{$lt:20})  #年龄小于20 less than
+		db.集合名.find(age:{$lte:20}) #年龄小于等于20 lt equal
+		db.集合名.find(age:{$ne:20}) #年龄不等于20 not equal
+		db.集合名.find(age:{$eq:20}) #年龄等于20 equal
+		db.集合名.find().count() #查询集合中的条数
+		db.集合名.find({name:/z/}) #表示匹配任意字符
+		db.集合名.find({name:^z})  #表示匹配以z开头的
+		db.集合名.find({条件1，条件2})  #表示符合条件1同时满足条件2的数据
+		db.集合名.find({$or:[{条件1}，{条件2}]})#表示符合条件1或者满足条件2的数据
+
+- 分页和排序
+
+		db.集合名.find().limit(条数) #查询指定条数
+		db.集合名.find().skip(条数)  #跳过指定条数
+		#实现分页
+		db.集合名.find().skip(条数1).limit(条数2)
+		#排序
+		db.集合名.find().sort({列名:1/0}) 1代表升序/0代表降序 
+
+	
+
+
+
+	
+ 	
+			
+
+    
+
+
+
+
+
+
+
+
+
+

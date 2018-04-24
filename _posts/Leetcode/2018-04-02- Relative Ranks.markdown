@@ -2,7 +2,7 @@
 layout:     post
 title:      "金牌银牌铜牌"
 subtitle:   " \"Hello World, Hello Blog\""
-date:       2018-04-01 13:00:00
+date:       2018-04-02 13:00:00
 author:     "suny"
 catalog: true
 categories: Leetcode

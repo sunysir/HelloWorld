@@ -1,0 +1,52 @@
+---
+layout:     post
+title:      "441. Arranging Coins"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-04-14 15:48:00
+author:     "suny"
+catalog: true
+categories: Leetcode
+tags:
+    - 笔记
+---
+<img src="/img/ArrangingCoins.jpg"/>
+
+思路1: 等差数列(a1+an)*x/2 = n  (x为行数n总和)
+
+python代码 68ms
+
+
+	class Solution(object):
+	    def arrangeCoins(self, n):
+	        """
+	        :type n: int
+	        :rtype: int
+	        """
+	        return int(((8*n+1)**.5-1)/2)
+	
+思路2：每次循环总数n减去行数i+1，知道n小于零位置返回当前行数
+
+
+python代码 (1108ms)
+
+	class Solution(object):
+    def arrangeCoins(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        if n == 1:
+            return 1
+        if n == 0:
+            return 0
+        for i in range(n):
+            n -= i+1
+            if n < 0:
+                return i 
+
+
+
+	
+	
+
+

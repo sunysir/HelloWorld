@@ -2,7 +2,7 @@
 layout:     post
 title:      "两个N位数乘积的最大回文数"
 subtitle:   " \"Hello World, Hello Blog\""
-date:       2018-04-01 15:48:00
+date:       2018-04-05 15:48:00
 author:     "suny"
 catalog: true
 categories: Leetcode

@@ -1,0 +1,71 @@
+---
+layout:     post
+title:      "515. Find Largest Value in Each Tree Row"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-04-14 16:48:00
+author:     "suny"
+catalog: true
+categories: Leetcode
+tags:
+    - 笔记
+---
+<img src="/img/FindLargestValue.jpg"/>
+
+
+
+思路: 核心思想广度优先遍历，创建个队列存放节点实现广度优先遍历，创建二维列表对每层值进行标记，最后分别判断每层最大值。
+
+python代码
+			
+		#创建节点
+		class Node(object):
+	    	def __init__(self,x):
+		        self.val = x
+				#层数标记
+		        self.flag = 0
+		        self.right = None
+		        self.left = None
+	            
+	
+	        
+		class Solution(object):
+		    def largestValues(self, root):
+		          list1 = [];list2 = []
+		          if root == None:
+		              return list1
+				  #根节点标记为1
+		          root.flag = 1
+				  #模拟队列存放根节点
+		          list2.append(root)
+		          while len(list2):
+		              ro = list2[0]
+					  #二维列表存放节点的值和层标
+		              list1.append([ro.flag,ro.val])
+					  #模拟队列
+		              list2.pop(0)
+		              if ro.left != None:
+		                  list2.append(ro.left)
+		                  ro.left.flag = ro.flag+1
+		              if ro.right != None:
+		                  list2.append(ro.right)
+		                  ro.right.flag = ro.flag+1
+		          dict1 = {}
+				  #遍历列表，判断相同层数最大值
+		          for i in list1:
+		              if i[0] not in dict1:
+		                  dict1[i[0]] = i[1]
+		              else:
+		                  if i[1] > dict1[i[0]]:
+		                      dict1[i[0]] = i[1]
+		          list1 = []
+				  #将字典中的值放到列表中以满足题意
+		          for value in dict1.values():
+		              list1.append(value)
+		          return list1
+
+
+
+	
+	
+
+

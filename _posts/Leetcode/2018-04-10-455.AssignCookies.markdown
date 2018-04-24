@@ -1,0 +1,77 @@
+---
+layout:     post
+title:      "455. Assign Cookies"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-04-11 09:48:00
+author:     "suny"
+catalog: true
+categories: Leetcode
+tags:
+    - 笔记
+---
+<img src="/img/AssignCookies.jpg"/>
+
+思路: 分别对饼干和孩子进行排序，拿最小的饼干去找孩子找到就分发人头计数加一，没找到就扔掉，知道最后一块饼干位置。
+
+python代码 （1108ms）
+	
+	class Solution(object):
+    def findContentChildren(self, g, s):
+        """
+        :type g: List[int]
+        :type s: List[int]
+        :rtype: int
+        """
+        g.sort()
+        s.sort()
+        count = 0
+        for i in range(len(s)):
+            for j in range(len(g)):
+                #饼干容量大于孩子饥饿值
+                if s[i] >= g[j]:
+                    #计数
+                    count+=1
+                    #分发饼干移除孩子
+                    g.remove(g[j])
+                    break
+        return count
+                
+
+
+	s = Solution()
+	num = s.findContentChildren([250,490,328,149,495,325,314,360,333,418,430,458], [376,71,228,110,215,410,363,135,508,268,494,288,24,362,20,5,247,118,152,393,458,354,201,188,425,167,220,114,148,43,403,385,512])
+	print(num)
+
+
+
+python代码  （80ms）
+
+	class Solution(object):
+	    def findContentChildren(self, g, s):
+	        """
+	        :type g: List[int]
+	        :type s: List[int]
+	        :rtype: int
+	        """
+	        g.sort();s.sort()
+	        count = 0;i = 0
+	        while i<len(s) and count<len(g):
+	            if s[i] >= g[count]:
+	                #找到人头+1
+	                count+=1
+	            #找没找到饼干都要处理掉
+	            i+=1
+	        return count
+	                
+	
+	
+	s = Solution()
+	num = s.findContentChildren([250,490,328,149,495,325,314,360,333,418,430,458], [376,71,228,110,215,410,363,135,508,268,494,288,24,362,20,5,247,118,152,393,458,354,201,188,425,167,220,114,148,43,403,385,512])
+	print(num)
+
+
+
+	
+	
+
+

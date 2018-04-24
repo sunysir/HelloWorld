@@ -1,0 +1,46 @@
+---
+layout:     post
+title:      "345. Reverse Vowels of a String"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-04-14 16:48:00
+author:     "suny"
+catalog: true
+categories: Leetcode
+tags:
+    - 笔记
+---
+<img src="/img/Reverse Vowels of a String.jpg"/>
+
+
+
+思路: 筛选出元音字母标记其在列表中的位置，然后双向遍历交换
+
+python代码
+			
+		class Solution:
+		    def reverseVowels(self, s):
+		        """
+		        :type s: str
+		        :rtype: str
+		        """
+		        list1 = ["a","e","i","o","u","A","E","I","O","U"];list2 = []
+		        slist = list(s)
+		        for i,letter in enumerate(s):
+		            if letter in list1:
+		                list2.append([i,letter])
+		        i = 0;j = len(list2)-1
+		        while i<j:
+		            temp = list2[i][1]
+		            list2[i][1] = list2[j][1]
+		            list2[j][1] = temp
+		            i+=1
+		            j-=1
+		        for k in list2:
+		            slist[k[0]] = k[1]
+		        return "".join(slist)
+
+
+	
+	
+
+

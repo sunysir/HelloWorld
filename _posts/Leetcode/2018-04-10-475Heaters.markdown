@@ -1,0 +1,73 @@
+---
+layout:     post
+title:      "475.Heaters"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-04-10 15:48:00
+author:     "suny"
+catalog: true
+categories: Leetcode
+tags:
+    - 笔记
+---
+<img src="/img/Headers.jpg"/>
+
+思路: 房子和暖气分别排序，遍历房子，拿每个房子去跟暖气数组中找离暖气最近的距离并记录半径，找出最后最大的半径返回
+
+python代码
+	
+	class Solution:
+	    def findRadius(self, houses, heaters):
+	        houses = sorted(houses)
+	        heaters = sorted(heaters)
+	        radius = 0;j = 0
+	        for house in houses:
+	            while j<len(heaters)-1 and abs(heaters[j]-house) >= abs(heaters[j+1]-house):
+	                j+=1
+	            radius = max(radius, abs(heaters[j]-house))
+	        return radius
+	            
+	s = Solution()
+	lo = s.findRadius([1,2,3],[2])
+	print(lo)
+
+
+超时代码
+
+	class Solution:
+	    def findRadius(self, houses, heaters):
+	        houses = sorted(houses)
+	        heaters = sorted(heaters)
+	        radius = 0
+	        
+	        def binSearch(arr, house):
+	            hi = len(arr)-1;lo = 0
+	            mid = (hi+lo)//2
+	            while True:
+	                
+	                if abs(hi-lo) <= 1:
+	                    a = abs(arr[hi] - house)
+	                    b = abs(house - arr[lo])
+	                    return min(a, b)
+	                if arr[mid] > house:
+	                    hi = mid
+	                elif arr[mid] < house:
+	                    lo = mid
+	                else:
+	                    return 0
+	
+	        for (i,house) in enumerate(houses):
+	            temp = binSearch(heaters, house)
+	            if radius <= temp:
+	                radius = temp
+	        return radius
+	            
+	s = Solution()
+	lo = s.findRadius([1,2,3],[2])
+	print(lo)
+
+
+
+	
+	
+
+

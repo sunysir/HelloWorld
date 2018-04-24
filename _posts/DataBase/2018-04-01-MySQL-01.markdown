@@ -1,0 +1,219 @@
+---
+layout:     post
+title:      "MySQL01"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-04-01 11:00:00
+author:     "suny"
+catalog: true
+categories: MySQL
+tags:
+    - 笔记
+---
+
+
+
+错误2019：通常是my.ini文件中的
+
+	[mysql]
+	
+	default-character-set=utf8  错误：utf-8 
+
+错误1045？：访问权限问题
+
+	在my.ini，[mysqld]下添加一行，使其登录时跳过权限检查
+	skip_grant_tables #忽略登录检测
+
+- 登录
+
+	
+	mysql -u root -p    enerpassword: password
+
+- 展示版本
+	
+		SELECT version()；
+
+- 展示所有数据库
+
+		SHOW databases；
+
+- 创建数据库
+
+		CREATE DATABASE name charset = 'utf8'；
+
+- 删除数据库
+
+		DROP DATABASE name；
+
+- 使用某个数据库
+
+		USE name
+
+- 看正在使用哪个数据库
+
+		SELECT DATABASE()
+
+- 在数据库中创建表
+
+		CREATE TABLE name(
+			id int auto_increment primary key,name varchar(20),
+			.....
+			.....
+		)；
+		数据初始不能为空  int not null
+		其中的id是主键自动增长
+
+- 查看表(name->表名)
+ 
+		DESC name  
+
+- 展示表创建信息
+
+		SHOW CREATE TABLE name;
+
+- 查看数据库中的所有表
+
+		SHOW TABLES；
+
+- 删除表
+
+		DROP TABLE name;
+
+- 表中添加元素
+
+		ALTER TABLE NAME ADD age int not null；
+
+- 修改表名
+
+		RENAME TABLE 表名 TO 新表名;
+
+- 修改表中列名
+	
+		ALTER TABLE 表名 CHANGE 列名 新列名 列类型；
+
+- 删除表中一列
+
+		ALTER TABLE 表名 DROP COLUMN 列名
+
+- 清空表中所有数据
+
+		TRUNCATE TABLE 表名  # 快速清除，不可恢复
+		DELETE FROM 表名  # 写日志，可恢复，速度慢
+
+---
+
+#### 增删改查
+
+- **增**
+ - **全列插入**
+ 	**格式： INSERT INTO 表名 VALUES(对应位置的值)**
+ - **缺省查阅**
+    **格式： INSERT INTO 表名(字段1，字段2，...) VALUES(对应值1，对应值2，...)**
+ - **插入多条数据**
+    **格式：INSERT INTO 表名 VALUES(对应位置的值)，(对应位置的值)，...**
+
+- **删**
+ - **格式： DELETE FROM 表名 WHERE 字段 = 对应值 **
+	 **注意：其中所有匹配的字段对应值符合的将会全部删除。**
+ 
+- **改**
+ - **格式：UPDATE 表名 SET 列名1 = 修改的值，列名2 = 修改的值 WHERE 条件**
+ 
+- **查**
+ - 	**整表打印 **
+    **格式：SELECT * FROM 表名**
+	
+---
+
+#### 条件查询
+
+- **基本查询语句**
+ - **查询所有  格式：SELECT * FROM 表名**
+ - **按列查询  格式：SELECT 列名1，列名2... FROM 表名**
+ - **按列查询起别名 格式：SELECT 列名1 as 别名1，列名2 as 别名2... FROM 表名**
+
+- **消除重复行**
+ - **格式：SELECT DISTINCT 列名1，列名2... FROM 表名，可以消除该列重复元素**
+
+
+- **条件查询**
+  - **WHERE 后面的条件运算符**
+    - \>  大于
+    - <   小于
+    - \>= 大于等于
+    - <=  小于等于
+    - <>  不等于
+    - =   等于
+    - and 与
+    - or  或
+    - not 非
+  - **模糊查询** 
+   - **like "%\_" %表示匹配任意内容任意多个 _表示匹配任意一个内容**
+  - **范围查询** 
+	  in(值1，值2，值3，...) 在某些值中取一个
+	  between A and B 表示范围，在A和B之间取值
+  - **判断非空 is not null**
+
+- **聚合函数**
+	- count(*) 表示计算查询结果的所有行数和
+	- min(列)  求此列最小值
+	- max(列)  求此列最大值
+	- sum(列)  求此列的和
+	- avg(列)  求此列的平均值
+	
+- **分组**
+  - **GROUP BY 列名  根据列名不同进行分组  通常跟count(*)一起用  先进行分组，在对每组进行求和**
+  - **分组之后再进行筛选不是where，而是用having 在GROUP BY后面使用**
+
+- **排序**
+	- **格式： SELECT \* FROM 表名 ORDER BY 列名 ASC/DESC(升序/降序),列名1 ASC/DESC(升序/降序)**
+
+- **分页**
+ - **就是分几次去查，比如需要查100个数据，分5页，那就先查0到19，再20到39，最后89到99...，** 
+ - **格式： SELECT \* FROM 表名 limit start，count**  **start表示起始位置，count表示需要查询的数量**
+
+- **表关联**
+ 
+	- **一对多**
+		- 主表外键
+
+SQL语句
+
+		USE test;
+		SHOW TABLES;
+		DROP TABLE classinfo;
+		DROP TABLE class;
+		#创建主表;
+		CREATE TABLE class(
+			id INT AUTO_INCREMENT PRIMARY KEY,
+			classname VARCHAR(20)
+		);
+		#创建外表;
+		CREATE TABLE classinfo(
+			id INT AUTO_INCREMENT PRIMARY KEY,
+			stuname VARCHAR(20),
+			classid INT
+		);
+		#主表添加值;
+		INSERT INTO class VALUES (0,'自动化'),(0,'互联网'),(0,'机械'),(0,'电子');
+		#外表添加值;
+		INSERT INTO classinfo VALUES (0,"zs",1),(0,"lisi",2),(0,"waw",3),
+		(0,"gh",3),(0,"yu",2);
+		#外表添加外键与主表关联(绑定主表id);
+		ALTER TABLE classinfo ADD FOREIGN KEY(classid) REFERENCES class(id);
+		INSERT INTO class VALUES(0, 'python04');
+		查询主表和外表 INNER JOIN  LEFT JOIN  RIGHT JOIN;
+		SELECT class.`classname`,classinfo.`stuname` FROM class INNER JOIN classinfo ON classinfo.`classid` = class.`id`;
+
+SQLyog结果图
+
+<img src="/img/SQLyog.jpg"/>
+
+
+
+
+
+
+
+
+
+

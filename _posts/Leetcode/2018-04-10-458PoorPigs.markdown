@@ -1,0 +1,46 @@
+---
+layout:     post
+title:      "458.Poor Pigs"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-04-10 15:48:00
+author:     "suny"
+catalog: true
+categories: Leetcode
+tags:
+    - 笔记
+---
+<img src="/img/poorpig.jpg"/>
+
+思路: 首先说下多维数组，空间是三维，在多一个时间节点就是4维了，因为每个时间节点都有一个三维空间。下面进入正题，一只猪每隔15分钟可以试验一个筒，那60分钟就可以试验4个桶，如果中毒就知道那个是毒桶，若都没中毒，那第五个桶一定有毒，4次试验可以检验5个桶。假设1头猪负责x轴的5个桶，另一头
+猪负责y轴的5个桶，第三头就负责z轴方向的5个桶，第四头就负责各个架子上的125个桶，依次类推，可以得到公式 **桶数量 = ((试验时间/死亡时间)+1)^猪的头数。**
+
+python代码
+	
+	class Solution(object):
+	    def poorPigs(self, buckets, minutesToDie, minutesToTest):
+	        m = buckets
+	        n = (minutesToTest/minutesToDie)+1
+	        pig = int(math.ceil(math.log(m)/math.log(n)))
+	        return pig
+
+
+java代码
+
+	public class Solution {
+		public int poorPigs(int buckets, int minutesToDie, int minutesToTest) {
+			if(minutesToDie == minutesToTest){
+				return 0;
+			}
+			int n = (minutesToTest/minutesToDie)+1;
+			int m = buckets;
+			int pig = new Double(Math.ceil((Math.log(m)/Math.log(n)))).intValue();
+	        return pig;
+	   }
+	}
+
+
+
+	
+	
+
+
