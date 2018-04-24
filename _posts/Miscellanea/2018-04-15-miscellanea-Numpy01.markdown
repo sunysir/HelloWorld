@@ -61,7 +61,7 @@ tags:
 	    >>>
 		[[ 0.92124302  0.16665547  1.94053302]
 	    [ 0.07277247  0.63885215 -0.86742746]
- 	   [-0.94445058  0.52956157  0.28216491]]
+		[-0.94445058  0.52956157  0.28216491]]
 	    [[0.52956157 0.28216491]]
 
 - **变形**
@@ -89,8 +89,9 @@ n1.reshape((row,column))将列表变为相应维度
 		print(n5)
 
 - **切分**
+- 
 
-	import numpy as np
+		import numpy as np
 		n1 = np.random.randint(10,15,36).reshape((6,6))
 		#参数1：列表  参数2：切分成几份 参数3：axis：0表示x方向，1表示y方向
 		n2 = np.split(n1,2,axis=1)
@@ -139,60 +140,61 @@ n1.reshape((row,column))将列表变为相应维度
 	- **np.dot(n1,n2) 矩阵之积**	
 
 
-		import numpy as np
-		n1 = np.array([1,2,3])
-		#最大值
-		print(n1.max())
-		#最小值
-		print(n1.min())
-		#最大值坐标
-		print(n1.argmax())
-		#最小值坐标
-		print(n1.argmin())
-		#平均值
-		print(n1.mean())
-		n2 = np.array([True,False,False,False])
-		n3 = np.array([False,False,False,False])
-		n4 = np.array([True,True,True,True])
-		#np.all() 列表中所有为True才为True 否则False
-		print(np.all(n4))
-		print(np.all(n2))
-		print(np.all(n3))
-		#np.any()列表中有一个值为True就返回True
-		print(np.any(n2))
-		print(np.any(n3))
-		print(np.any(n4))
-
-		ou：	3
-				1
-				2
-				0
-				2.0
-				True
-				False
-				False
-				True
-				False
-				True
 		
-		#numpy中使用np.nan表示空值，其类型是float类型，可以进行运算，但其计算结果都是nan
-		np.nan 表示 None
-		
-		n1 = np.array([1,2,3,np.nan])
-		print(n1.sum())
-		#当数组中有空值求和需要忽略空值
-		print(np.nansum(n1))
-		>>> nan
-			6.0
-
-
-		#矩阵之积
-
-			in:	 n1 = np.array([1,2,3])
-					n2 = np.array([[4],[5],[6]])
-					print(np.dot(n1,n2))
-
-			ou: 	[32]
+			import numpy as np
+			n1 = np.array([1,2,3])
+			#最大值
+			print(n1.max())
+			#最小值
+			print(n1.min())
+			#最大值坐标
+			print(n1.argmax())
+			#最小值坐标
+			print(n1.argmin())
+			#平均值
+			print(n1.mean())
+			n2 = np.array([True,False,False,False])
+			n3 = np.array([False,False,False,False])
+			n4 = np.array([True,True,True,True])
+			#np.all() 列表中所有为True才为True 否则False
+			print(np.all(n4))
+			print(np.all(n2))
+			print(np.all(n3))
+			#np.any()列表中有一个值为True就返回True
+			print(np.any(n2))
+			print(np.any(n3))
+			print(np.any(n4))
+	
+			ou：	3
+					1
+					2
+					0
+					2.0
+					True
+					False
+					False
+					True
+					False
+					True
+			
+			#numpy中使用np.nan表示空值，其类型是float类型，可以进行运算，但其计算结果都是nan
+			np.nan 表示 None
+			
+			n1 = np.array([1,2,3,np.nan])
+			print(n1.sum())
+			#当数组中有空值求和需要忽略空值
+			print(np.nansum(n1))
+			>>> nan
+				6.0
+	
+	
+			#矩阵之积
+	
+				in:	 n1 = np.array([1,2,3])
+						n2 = np.array([[4],[5],[6]])
+						print(np.dot(n1,n2))
+	
+				ou: 	[32]
 
 
 
@@ -216,13 +218,47 @@ n1.reshape((row,column))将列表变为相应维度
 	- np.partition(n1，n) # 不改变原列表返回一个新的部分排序的列表 n为正数时为正数下标索引前面部分进行排序
 
 
-		n1 = np.array([11,2,56,1,8,34,12])
-		# n1.sort()
-		n2 = np.sort(n1)
-		n3 = np.partition(n1,3
-
-		ou：	[11  2 56  1  8 34 12]
-				[ 1  2  8 11 12 34 56] 
-				[ 2  1  8 11 56 34 12]
+				
+				n1 = np.array([11,2,56,1,8,34,12])
+				# n1.sort()
+				n2 = np.sort(n1)
+				n3 = np.partition(n1,3
+		
+				ou：	[11  2 56  1  8 34 12]
+						[ 1  2  8 11 12 34 56] 
+						[ 2  1  8 11 56 34 12]
 
 		
+
+
+---
+
+
+			
+			import numpy as np
+			import pandas as pd
+			from matplotlib import pyplot as plt
+			#把图片解析成三维数组[上下,左右,颜色rbg]
+			img_data = plt.imread(r"C:\Users\suny\Desktop\msx.png")
+			img_show = plt.imshow(img_data)
+			plt.show()
+			#ndarray数组切片
+			img_data = img_data[::1,::-1]
+			img_show = plt.imshow(img_data)
+			plt.show()
+			img_data = img_data[::1,::-1,::-1]
+			img_show = plt.imshow(img_data)
+			plt.show()
+
+
+
+
+
+<img src="/img/msx.jpg"/>
+
+
+
+---
+
+
+
