@@ -36,6 +36,9 @@ tags:
 		# print(n10)
 		n11 = np.full((3,3),fill_value=0,dtype=int)
 		print(n11)
+		n12 = np.random.normal(size=(3,3)) #生成3x3的符合正态分布的矩阵
+		print(n12)
+		n13 = np.random.permutation(5) #0到4随机排序
 
 - **ndarray属性**
 
