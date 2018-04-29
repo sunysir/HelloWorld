@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Numpy03"
+title:      "Numpy03_pandas"
 subtitle:   " \"Hello World, Hello Blog\""
 date:       2018-04-17 11:00:00
 author:     "suny"
@@ -216,6 +216,7 @@ tags:
 > **df.groupby(列索引).聚合函数 or df.groupby(列索引).apply(np.聚合函数) or df.groupby(列索引).transform(np.聚合函数)**
 > **apply会根据分组情况返回值，去重 **
 > **transform会自动匹配列索引返回值，不去重**
+> **df[列索引].value_counts()#统计该列中每个类出现次数**
 
 
 	
