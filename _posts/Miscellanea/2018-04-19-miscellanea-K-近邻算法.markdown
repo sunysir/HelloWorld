@@ -44,7 +44,7 @@ python简单测试（分类）
 			print(data)
 
 
-python sklearn包的KNN鸢尾花测试数据
+python sklearn包的KNN鸢尾花分类测试数据
 
 
 
@@ -80,3 +80,30 @@ python sklearn包的KNN鸢尾花测试数据
 
 
 <img src="/img/KNNyuanweihua.jpg">
+
+
+
+回归分析
+
+
+
+			from sklearn.neighbors import KNeighborsRegressor
+			from matplotlib import pyplot as plt
+			import numpy as np
+			x = np.linspace(-np.pi,np.pi,100)
+			y = np.sin(x)
+			x[::5] += np.random.random(20)-0.8
+			x_train = x.reshape(-1,1)
+			knreg = KNeighborsRegressor(n_neighbors=5)
+			knreg.fit(x_train,y)
+			test = (np.arange(x.min(),x.max(),0.001)).reshape(-1,1)
+			res = knreg.predict(test)
+			plt.plot(test,res)
+			plt.show()
+
+
+<img src="/img/KNNhuigui.jpg">
+
+
+
+
