@@ -2,7 +2,7 @@
 layout:     post
 title:      "手写数字识别"
 subtitle:   " \"Hello World, Hello Blog\""
-date:       2018-04-19 11:00:00
+date:       2018-04-20 11:00:00
 author:     "suny"
 catalog: true
 categories: Miscellanea
