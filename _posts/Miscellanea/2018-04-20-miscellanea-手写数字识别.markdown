@@ -43,7 +43,7 @@ pytho代码
 				print((y_==y_true).sum()/y_true.size)
 
 
-[data](file:///img/data")
+<a href ="/img/data"/>
 
 
 
