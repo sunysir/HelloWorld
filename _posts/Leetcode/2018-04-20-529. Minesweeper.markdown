@@ -1,0 +1,75 @@
+---
+layout:     post
+title:      "529. Minesweeper"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-04-20 16:48:00
+author:     "suny"
+catalog: true
+categories: Leetcode
+tags:
+    - 笔记
+---
+<img src="/img/saolei01.jpg"/>
+<img src="/img/saolei02.jpg"/>
+
+
+思路: 核心思想局部看整体（递归思想）
+
+python代码
+			
+				class Solution:
+			    def updateBoard(self, board, click):
+			        """
+			        :type board: List[List[str]]
+			        :type click: List[int]
+			        :rtype: List[List[str]]
+			        """
+					#长宽为1时候判定
+			        if len(board) == 1 and len(board[0]) == 1:
+			            board[0][0] = "X"
+			        if board[click[0]][click[1]] == "M":
+			            
+			            board[click[0]][click[1]] = "X"
+			            return board
+					#递归之后判断该点是否为没翻开过的区域
+			        if board[click[0]][click[1]] == "E":
+						#判断点四周的位置参数
+			            pos = [[0,1],[0,-1],[1,0],[-1,0],[1,1],[1,-1],[-1,1],[-1,-1]]
+			            count = 0
+						#遍历该点四周所有位置，判断是否有雷有则计数加1
+			            for i in pos:
+			                temp = [click[0]+i[0],click[1]+i[1]]
+			                if temp[0] >= len(board) or temp[1] >= len(board[1]) or temp[0] < 0 or temp[1] < 0:
+			                    continue
+			                if board[temp[0]][temp[1]] == "M":
+			                    count+=1
+						#周围又雷则填入数字没有则填“B” blank
+			            if count != 0:
+			                board[click[0]][click[1]] = str(count)
+			            else:
+			                board[click[0]][click[1]] = "B"
+			            if board[click[0]][click[1]] == "B":
+							#如果该点为B则递归该点
+			                for i in pos:
+			                    temp = [click[0]+i[0],click[1]+i[1]]
+			                    if temp[0] < len(board) and temp[1] < len(board[1]) and temp[0] >= 0 and temp[1] >= 0:
+			                        self.updateBoard(board,[temp[0],temp[1]])
+			        return board
+		
+		
+					board = [["B","1","E","1","B"],
+					         ["B","1","M","1","B"],
+					         ["B","1","1","1","B"],
+					         ["B","B","B","B","B"]]
+					Click = [1,2]
+					s = Solution()
+					board = s.updateBoard(board,Click)
+					print(board)
+
+
+
+
+	
+	
+
+

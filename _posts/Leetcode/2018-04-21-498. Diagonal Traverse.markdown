@@ -1,0 +1,165 @@
+---
+layout:     post
+title:      "498. Diagonal Traverse"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-04-20 16:48:00
+author:     "suny"
+catalog: true
+categories: Leetcode
+tags:
+    - 笔记
+---
+
+<img src="/img/DiagonalTraverse.jpg"/>
+
+
+思路: 
+
+<img src="/img/dr.jpg"/>
+
+
+python代码（120ms）You are here! Your runtime beats 100.00 % of python3 submissions.
+
+				
+				class Solution:
+				    def findDiagonalOrder(self, matrix):
+				        """
+				        :type matrix: List[List[int]]
+				        :rtype: List[int]
+				        """
+				        #特殊情况直接返回结果
+				        if len(matrix) == 0:
+				            return []
+				        if len(matrix) == 1:
+				            return matrix[0]
+				        if len(matrix[0]) == 1:
+				            return [i[0] for i in matrix]
+				        #列数
+				        col = len(matrix[0])
+				        #行数
+				        row = len(matrix)
+				        #初始坐标
+				        pos_true = [0,0]
+				        #初始坐标对应的值存入数组
+				        arr = [matrix[0][0]]
+				        #左边界和下边界坐标
+				        left_edge = 0
+				        down_edge = len(matrix)-1
+				        pos_downleft = (1,-1)
+				        #判断行
+				        for i in range(1,col):
+				            pos_true = [0,i]
+				            #临时数组，保存每斜列的值
+				            temp = []
+				            #x,y有一个越界则退出循环
+				            while pos_true[0]<= down_edge and pos_true[1] >= 0:
+				                val = matrix[pos_true[0]][pos_true[1]]
+				                temp.append(val)
+				                pos_true = [pos_true[0]+pos_downleft[0],pos_true[1]+pos_downleft[1]]
+				            if i%2==0:
+				                temp.reverse()
+				            arr+=temp
+				        #判断列
+				        for j in range(1,row):
+				            pos_true = [j,len(matrix[0])-1]
+				            #临时数组，保存每斜列的值
+				            temp = []
+				            #x,y有一个越界则退出循环
+				            while pos_true[0]<= down_edge and pos_true[1] >= 0:
+				                val = matrix[pos_true[0]][pos_true[1]]
+				                temp.append(val)
+				                pos_true = [pos_true[0]+pos_downleft[0],pos_true[1]+pos_downleft[1]]
+				            #判断如果列尾索引是偶数，则行数索引为偶数时候数组翻转
+				            if (len(matrix[0])-1)%2==0:
+				                if j%2==0:
+				                    temp.reverse()
+				                arr+=temp
+				            #判断如果列索引是奇数，则行索引为奇数时数组翻转
+				            else:
+				                if j%2!=0:
+				                    temp.reverse()
+				                arr+=temp
+				        return arr
+
+
+python代码(暴力解法)
+
+
+		import sys   
+		sys.setrecursionlimit(1000000)
+		class Solution:
+		    def findDiagonalOrder(self, matrix):
+		        """
+		        :type matrix: List[List[int]]
+		        :rtype: List[int]
+		        """
+		        flag = "top"
+		        init_pos = [0,0]
+		        true_pos = init_pos
+		        list1 = []
+		        def rec_marrix(pos,flag,arr):
+		            if len(matrix) == 0:
+		                return []
+		            if len(matrix) == 1:
+		                return matrix[0]
+		            elif len(matrix[0]) == 1:
+		                return [i[0] for i in matrix]
+		            if pos[0]>=len(matrix) or pos[1]>=len(matrix[0]) or pos[1]<0:
+		                return arr
+		            arr.append(matrix[pos[0]][pos[1]])
+		            top_right = [-1,1]
+		            down_left = [1,-1]
+		            top = [-1,0]
+		            down = [1,0]
+		            left = [0,-1]
+		            right = [0,1]
+		            if flag == "top":
+		                #左上和右都不在矩阵中  边界判断
+		                if (pos[0]+top_right[0]<0 or pos[1]+top_right[1]>=len(matrix[0]) ) and ( pos[0]+right[0]< 0  or pos[1]+right[1]>=len(matrix[0])) and ( pos[0]+down[0]>=len(matrix)):
+		                    return arr
+		                #下一点超外边界了
+		                if pos[0]+top_right[0]< 0  or pos[1]+top_right[1]>=len(matrix[0]):
+		                    #先判断右在判断下
+		                    if pos[1]+right[1]>=len(matrix[0]):
+		                        pos = [pos[0]+down[0],pos[1]+down[1]]
+		                        flag = "down"
+		                        rec_marrix(pos,flag,arr)
+		                        return arr
+		                    else:
+		                        pos = [pos[0]+right[0],pos[1]+right[1]]
+		                        flag = "down"
+		                        rec_marrix(pos,flag,arr)
+		                        return arr
+		                pos = [pos[0]+top_right[0],pos[1]+top_right[1]]
+		                rec_marrix(pos,flag,arr)
+		            elif flag == "down":
+		                #更新后左下和下和右都不在矩阵中  边界判断
+		                if (pos[0]+down_left[0]>=len(matrix) or pos[1]+down_left[1]<0 ) and (pos[0]+right[0]< 0  or pos[1]+right[1]>=len(matrix[0]))  and (pos[0]+down[0]>=len(matrix) or  pos[1]+down[1]<0):
+		                    return arr
+		                #下一点超外边界了
+		                if pos[0]+down_left[0]>=len(matrix) or pos[1]+down_left[1]<0 :
+		                    #先判断下在判断右
+		                    if pos[0]+down[0]>=len(matrix):
+		                        pos = [pos[0]+right[0],pos[1]+right[1]]
+		                        flag = "top"
+		                        rec_marrix(pos,flag,arr)
+		                        return arr
+		                    else:
+		                        pos = [pos[0]+down[0],pos[1]+down[1]]
+		                        flag = "top"
+		                        rec_marrix(pos,flag,arr)
+		                        return arr
+		                pos = [pos[0]+down_left[0],pos[1]+down_left[1]]
+		                rec_marrix(pos,flag,arr)
+		            return arr
+		        return rec_marrix(init_pos,flag,list1)
+			
+				
+
+
+
+
+	
+	
+
+

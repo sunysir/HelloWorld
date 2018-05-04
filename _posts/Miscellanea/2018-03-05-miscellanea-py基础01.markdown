@@ -212,6 +212,16 @@ strip()函数
 		iamsuny! i am a good man!
 		iamsuny! i am a good man
 
+---
+
+
+		a = [1,2,3,4]
+		b = a
+		b.append(5)
+		print(a,b)
+		>>> a = [1,2,3,4,5]
+			b = [1,2,3,4,5]
+
 	
 	
 	

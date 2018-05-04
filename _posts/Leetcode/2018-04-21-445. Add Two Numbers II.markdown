@@ -1,0 +1,113 @@
+---
+layout:     post
+title:      "445. Add Two Numbers II"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-04-21 16:48:00
+author:     "suny"
+catalog: true
+categories: Leetcode
+tags:
+    - 笔记
+---
+
+
+
+思路:  分别遍历链表转成整型相加在转成数组
+
+
+
+				# Definition for singly-linked list.
+				class ListNode:
+				     def __init__(self, x):
+				        self.val = x
+				        self.next = None
+				
+				class Solution:
+				    def addTwoNumbers(self, l1, l2):
+				        """
+				        :type l1: ListNode
+				        :type l2: ListNode
+				        :rtype: ListNode
+				        """
+				        list1 = [];list2 = []
+				        while l1!=None:
+				            list1.append(l1.val)
+				            l1 = l1.next
+				        while l2!=None:
+				            list2.append(l2.val)
+				            l2 = l2.next
+				        num1 = int("".join(list(map(str,list1))))
+				        num2 = int("".join(list(map(str,list2))))
+				        num3 = list(map(int,list(str(num1+num2))))
+				        
+				        return num3
+
+
+
+
+引申：python中引用在调用内置函数的时候原函数会跟着一起改变
+
+							例如 a = [1,2,3,4,5]
+								b = a 
+								b.append(6)
+								ou: a = [1,2,3,4,5,6]
+									b = [1,2,3,4,5,6] 
+								当b引用a的时候b使用a的内置方法的时候a会随着b一起改变
+								当b被赋值的时候a与b就会完全独立
+								下面是创建链表的例子  使用尾插法
+
+
+
+			# Definition for singly-linked list.
+			class ListNode:
+			     def __init__(self, x):
+			        self.val = x
+			        self.next = None
+			
+			class Solution:
+			    def addTwoNumbers(self, l1, l2):
+			        """
+			        :type l1: ListNode
+			        :type l2: ListNode
+			        :rtype: ListNode
+			        """
+			        list1 = [];list2 = []
+			        while l1!=None:
+			            list1.append(l1.val)
+			            l1 = l1.next
+			        while l2!=None:
+			            list2.append(l2.val)
+			            l2 = l2.next
+			        num1 = int("".join(list(map(str,list1))))
+			        num2 = int("".join(list(map(str,list2))))
+			        num3 = str(num1+num2)
+			        for i,num in enumerate(num3):
+			            if i == 0:
+			                l3 = ListNode(num)
+			                #引用头指针
+			                temp = l3
+			                continue
+			            r = ListNode(num)
+			            #当调用头指针内置数据的时候l3头指针跟随便变化相当于temp.next = l3.next = r =  ListNode(num)
+			            temp.next = r
+			            #当对头指针的引用直接赋值的时候，temp就已经与l3完全独立了，这时temp = r
+			            temp = r
+			            return l3
+			
+			
+			
+			l1 = ListNode(7);l1.next = ListNode(2);l1.next.next = ListNode(4);l1.next.next.next = ListNode(3)
+			l2 = ListNode(5);l2.next = ListNode(6);l2.next.next = ListNode(4)
+			s = Solution()
+			res = s.addTwoNumbers(l1,l2)
+			print(res)
+						
+							
+			
+
+
+
+	
+	
+
+
