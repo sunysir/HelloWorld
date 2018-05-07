@@ -157,48 +157,7 @@ tags:
       </ol>
       ```
 
-6. 宏的使用
 
-   1. 定义一个宏，如下：
-
-      ```html
-      {# 定义宏 #}
-      {% macro show_name(name) %}
-      <h1>Hello {{ name }}</h1>
-      {% endmacro %}
-      ```
-
-   2. 使用已定义好的宏
-
-      ```html
-      {# 使用宏 #}
-      {{ show_name(name) }}
-      {{ show_name(name) }}
-      ```
-
-   3. 说明
-
-      1. 宏采用类似python的函数的语法进行定义，哪里使用哪里调用即可
-
-      2. 可以将常用的功能封装成宏，单独存在一个文件中，使用时倒入即可，语法如下
-
-         ```html
-         {# 导入宏 #}
-         {% from 'macro1.html' import show_name %}
-
-         {# 使用宏 #} 
-         {{ show_name(name) }}
-         ```
-
-7. 文件包含(include)
-
-   1. 在一个模板文件中包含另一个模板文件，如下：
-
-      ```
-      {% include 'macro1.html' %}
-      ```
-
-   2. 说明：相当于将包含的文件内容原封不动的粘贴过来
 
 8. 模板继承
 
