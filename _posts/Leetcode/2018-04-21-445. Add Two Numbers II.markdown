@@ -11,6 +11,8 @@ tags:
 ---
 
 
+<img src="/img/AddTwoNumbersII.jpg"/>
+
 
 思路:  分别遍历链表转成整型相加在转成数组
 
