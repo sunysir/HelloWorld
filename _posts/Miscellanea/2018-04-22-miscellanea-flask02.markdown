@@ -157,20 +157,20 @@ tags:
 
    1. 定义一个宏，如下：
 
-      ```html
-      {# 定义宏 #}
-      {% macro show_name(name) %}
-      <h1>Hello {{ name }}</h1>
-      {% endmacro %}
-      ```
+		      html
+		      {# 定义宏 #}
+		      {% macro show_name(name) %}
+		      <h1>Hello {{ name }}</h1>
+		      {% endmacro %}
+      
 
    2. 使用已定义好的宏
 
-      ```html
-      {# 使用宏 #}
-      {{ show_name(name) }}
-      {{ show_name(name) }}
-      ```
+		      html
+		      {# 使用宏 #}
+		      {{ show_name(name) }}
+		      {{ show_name(name) }}
+		      
 
    3. 说明
 
@@ -178,59 +178,59 @@ tags:
 
       2. 可以将常用的功能封装成宏，单独存在一个文件中，使用时倒入即可，语法如下
 
-         ```html
-         {# 导入宏 #}
-         {% from 'macro1.html' import show_name %}
-
-         {# 使用宏 #} 
-         {{ show_name(name) }}
-         ```
+		         html
+		         {# 导入宏 #}
+		         {% from 'macro1.html' import show_name %}
+		
+		         {# 使用宏 #} 
+		         {{ show_name(name) }}
+		         
 
 7. 文件包含(include)
 
    1. 在一个模板文件中包含另一个模板文件，如下：
 
-      ```
-      {% include 'macro1.html' %}
-      ```
+      
+     			 {% include 'macro1.html' %}
+      
 
    2. 说明：相当于将包含的文件内容原封不动的粘贴过来
 
 8. 模板继承
 
    1. 添加父级模板文件(parents.html)，内容如下：
-
-      ```html
-      <html>
-      <head>
-          {% block head %}
-          <title>
-              {% block title %}默认标题{% endblock %}
-          </title>
-          {% endblock %}
-      </head>
-      <body>
-          {% block body %}默认内容{% endblock %}
-      </body>
-      </html>
-      ```
+		
+		      html
+		      <html>
+		      <head>
+		          {% block head %}
+		          <title>
+		              {% block title %}默认标题{% endblock %}
+		          </title>
+		          {% endblock %}
+		      </head>
+		      <body>
+		          {% block body %}默认内容{% endblock %}
+		      </body>
+		      </html>
+      
 
    2. 添加子模板文件(children.html)，内容如下：
 
-      ```html
-      {# 继承自指定的模板文件 #}
-      {% extends 'parents.html' %}
-
-      {# 重写父级模板中的block #}
-      {% block title %}首页{% endblock %}
-
-      {# 可以添加完善父级模板指定的block #}
-      {% block body %}
-          {# 保留父级模板中的内容 #}
-          {{ super() }}
-          <h1>新加的内容</h1>
-      {% endblock %}
-      ```
+		      html
+		      {# 继承自指定的模板文件 #}
+		      {% extends 'parents.html' %}
+		
+		      {# 重写父级模板中的block #}
+		      {% block title %}首页{% endblock %}
+		
+		      {# 可以添加完善父级模板指定的block #}
+		      {% block body %}
+		          {# 保留父级模板中的内容 #}
+		          {{ super() }}
+		          <h1>新加的内容</h1>
+		      {% endblock %}
+      
 
    3. 说明：
 
@@ -253,16 +253,16 @@ tags:
 
 3. 添加模板文件，内容如下：
 
-   ```html
-   {# 继承自bootstrap的基础模板 #}
-   {% extends 'bootstrap/base.html' %}
-
-   {% block title %}用户登录{% endblock %}
-
-   {% block content %}
-       <div class="container">欢迎您的到来</div>
-   {% endblock %}
-   ```
+	   html
+	   {# 继承自bootstrap的基础模板 #}
+	   {% extends 'bootstrap/base.html' %}
+	
+	   {% block title %}用户登录{% endblock %}
+	
+	   {% block content %}
+	       <div class="container">欢迎您的到来</div>
+	   {% endblock %}
+   
 
 4. bootstrap的基础模板文件已经提供了很多的block，如下：
 
@@ -300,49 +300,49 @@ tags:
 
 3. 内容：
 
-   ```html
-   {% extends 'bootstrap/base.html' %}
-
-   {% block title %}博客中心{% endblock %}
-
-   {# 导航条 #}
-   {% block navbar %}
-       <nav class="navbar navbar-inverse" style="border-radius: 0px;">
-           <div class="container">
-               <!-- Brand and toggle get grouped for better mobile display -->
-               <div class="navbar-header">
-                   <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                           data-target=".navbar-collapse" aria-expanded="false">
-                       <span class="sr-only">Toggle navigation</span>
-                       <span class="icon-bar"></span>
-                       <span class="icon-bar"></span>
-                       <span class="icon-bar"></span>
-                   </button>
-                   <a class="navbar-brand" href="#">首页</a>
-               </div>
-
-               <!-- Collect the nav links, forms, and other content for toggling -->
-               <div class="collapse navbar-collapse">
-                   <ul class="nav navbar-nav">
-                       <li><a href="#">板块一</a></li>
-                       <li><a href="#">板块二</a></li>
-                   </ul>
-
-                   <ul class="nav navbar-nav navbar-right">
-                       <li><a href="#">登录</a></li>
-                       <li><a href="#">注册</a></li>
-                   </ul>
-               </div><!-- /.navbar-collapse -->
-           </div><!-- /.container -->
-       </nav>
-   {% endblock %}
-
-   {% block content %}
-       <div class="container">
-           {% block page_content %}{% endblock %}
-       </div>
-   {% endblock %}
-   ```
+		   html
+		   {% extends 'bootstrap/base.html' %}
+		
+		   {% block title %}博客中心{% endblock %}
+		
+		   {# 导航条 #}
+		   {% block navbar %}
+		       <nav class="navbar navbar-inverse" style="border-radius: 0px;">
+		           <div class="container">
+		               <!-- Brand and toggle get grouped for better mobile display -->
+		               <div class="navbar-header">
+		                   <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+		                           data-target=".navbar-collapse" aria-expanded="false">
+		                       <span class="sr-only">Toggle navigation</span>
+		                       <span class="icon-bar"></span>
+		                       <span class="icon-bar"></span>
+		                       <span class="icon-bar"></span>
+		                   </button>
+		                   <a class="navbar-brand" href="#">首页</a>
+		               </div>
+		
+		               <!-- Collect the nav links, forms, and other content for toggling -->
+		               <div class="collapse navbar-collapse">
+		                   <ul class="nav navbar-nav">
+		                       <li><a href="#">板块一</a></li>
+		                       <li><a href="#">板块二</a></li>
+		                   </ul>
+		
+		                   <ul class="nav navbar-nav navbar-right">
+		                       <li><a href="#">登录</a></li>
+		                       <li><a href="#">注册</a></li>
+		                   </ul>
+		               </div><!-- /.navbar-collapse -->
+		           </div><!-- /.container -->
+		       </nav>
+		   {% endblock %}
+		
+		   {% block content %}
+		       <div class="container">
+		           {% block page_content %}{% endblock %}
+		       </div>
+		   {% endblock %}
+   
 
 ### 错误页面定制
 
@@ -356,11 +356,11 @@ tags:
 
 2. 创建404.html模板文件，如下：
 
-   ```html
-   {% extends 'base.html' %}
-   {% block title %}出错了{% endblock %}
-   {% block page_content %}<h1>臣妾实在找不到@_@</h1>{% endblock %}
-   ```
+		   html
+		   {% extends 'base.html' %}
+		   {% block title %}出错了{% endblock %}
+		   {% block page_content %}<h1>臣妾实在找不到@_@</h1>{% endblock %}
+   
 
 3. 练习：定制一个500错误页面显示
 
@@ -383,29 +383,29 @@ tags:
 
 2. 加载网站图标，在基础模板中添加如下内容：
 
-   ```html
-   {% block head %}
-       {{ super() }}
-       {# 加载网站的图标 #}
-       <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
-   {% endblock %}
-   ```
+		   html
+		   {% block head %}
+		       {{ super() }}
+		       {# 加载网站的图标 #}
+		       <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
+		   {% endblock %}
+   
 
 3. 加载图片、css、js
 
-   ```html
-   {% block page_content %}
-       <img src="{{ url_for('static', filename='img/meinv.jpg') }}">
-       <div class="test"></div>
-   {% endblock %}
-
-   {% block scripts %}
-       {{ super() }}
-       <script type="text/javascript" src="{{ url_for('static', filename='js/common.js') }}"></script>
-   {% endblock %}
-
-   {% block styles %}
-       {{ super() }}
-       <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}" type="text/css">
-   {% endblock %}
-   ```
+		   html
+		   {% block page_content %}
+		       <img src="{{ url_for('static', filename='img/meinv.jpg') }}">
+		       <div class="test"></div>
+		   {% endblock %}
+		
+		   {% block scripts %}
+		       {{ super() }}
+		       <script type="text/javascript" src="{{ url_for('static', filename='js/common.js') }}"></script>
+		   {% endblock %}
+		
+		   {% block styles %}
+		       {{ super() }}
+		       <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}" type="text/css">
+		   {% endblock %}
+   
