@@ -1,0 +1,67 @@
+---
+layout:     post
+title:      "498. Diagonal Traverse"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-04-20 16:48:00
+author:     "suny"
+catalog: true
+categories: Leetcode
+tags:
+    - 笔记
+---
+
+题目：n 个数字（0,1,…,n-1）形成一个圆圈，从数字0 开始，
+每次从这个圆圈中删除第m 个数字（第一个为当前数字本身，第二个为当前数字的下一个数
+字）。
+当一个数字删除后，从被删除数字的下一个继续删除第m 个数字。
+求出在这个圆圈中剩下的最后一个数字。
+
+
+思路: 创建环形链表每次到m-1就把该元素指向下下元素  很简单
+
+
+
+python代码
+
+				
+						class Node():
+						    def __init__(self,val):
+						        self.val = val
+						        self.next = None
+						class Solution():
+						    def rec(self, num,m):
+						        #创建环形链表
+						        i = 1
+						        head = Node(0)
+						        temp = head
+						        while i < num:
+						            r = Node(i)
+						            temp.next = r
+						            temp = r
+						            i+=1
+						        #头尾相接
+						        temp.next = head
+						        temp = head
+						        j = 0
+						        #每到m就删除，刨去m=0的特殊情况（指定剩下最后一个编号的人）
+						        while True:
+						            if m == 0:
+						                return num-1
+						            if temp.next.val == temp.val:
+						                return temp.val
+						            if j == m:
+						                # print(temp.next.val)
+						                temp.next = temp.next.next
+						                j = 0
+						            temp = temp.next
+						            j+=1
+						
+						
+						
+						s = Solution()
+						res = s.rec(10,4)
+						print(res)
+
+	
+
+
