@@ -1,0 +1,86 @@
+---
+layout:     post
+title:      "字符全排列"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-04-25 19:00:00
+author:     "suny"
+catalog: false
+categories: Algorithms
+tags:
+    - 笔记
+---
+
+题目描述
+输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba
+
+思路：递归思想，首先所有固定第一个字母，后面依次交换，然后交换后的字符串分别递归在固定前两个字符，后面依次与第二个字符交换，直接递归到倒数第二个字符为止，开始添加所有的结果
+
+第一次
+	abc
+	bac
+	cab
+第二次 也到了倒数第二个字符开始往列表中添加结果
+
+	abc acb
+	bac bca
+	cab cba
+	['abc','acb','bac','bca','cab','cba']
+
+
+
+
+python 测试代码(直接导包，非常简单)
+
+
+		# -*- coding:utf-8 -*-
+		from itertools import permutations
+		class Solution:
+		    def Permutation(self, ss):
+		        # write code here
+		        if len(ss) == 0:
+		            return []
+		        def toStr(string):
+		            return "".join(string)
+		        list2 = []
+		        list1 = list(map(toStr,permutations(ss)))
+		        for i in list1:
+		            if i not in list2:
+		                list2.append(i)
+		        return list2
+
+python 测试代码（对上面的包进行原理实现）
+
+
+				import copy
+				class Solution:
+				    def Permutation(self, ss):
+				        #特殊边界判断
+				        if len(ss) == 0:
+				            return []
+				        if len(ss) == 1:
+				            return [ss]
+				        # write code here
+				        ss = list(ss)
+				        count = 0
+				        list1 = []
+				        def change(arr,count,list1):
+				            #遍历字符从count开始，其实count为0，没递归依次count加1
+				            for i in range(count,len(arr)):
+				                #直接递归到count == len(arr)-2开始储存结果
+				                if count == len(arr)-2:
+				                    temp = copy.copy(arr)
+				                    temp[count], temp[i] = temp[i], temp[count]
+				                    list1.append("".join(temp))
+				                    continue
+				                temp = copy.copy(arr)#对字符串浅复制，以保证原字符串不变
+				                temp.insert(0,temp[i])#temp[count], temp[i] = temp[i], temp[count]这种方式交换也可
+				                temp.pop(i+1)
+				                list1=change(temp,count+1,list1)
+				            return list1
+				        list1 = change(ss, count, list1)
+				        list2 = []
+				        #筛选出重复字符串
+				        for i in list1:
+				            if i not in list2:
+				                list2.append(i)
+				        return list2

@@ -1,0 +1,41 @@
+---
+layout:     post
+title:      "蛇形矩阵"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-04-22 19:00:00
+author:     "suny"
+catalog: false
+categories: Algorithms
+tags:
+    - 笔记
+---
+
+题目描述
+把只包含因子2、3和5的数称作丑数（Ugly Number）。例如6、8都是丑数，但14不是，因为它包含因子7。 习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。
+
+
+
+**暴力解法不说了，就是除2除3除5余留，说说效率高的，时间复杂度为O(n),首先建立三个索引index2，index3，index5分别等于0，在建立一个列表中存放一个1，丑数无非就是完全由2，3，5组成的，每次都存放2，3，5乘完之后的最小值，一轮循环存放一个，例如第一轮存2，第二轮存3，第三轮存5.。。。。，还是代码吧**
+
+python测试代码
+
+
+		# -*- coding:utf-8 -*-
+		class Solution:
+		    def GetUglyNumber_Solution(self, index):
+				#index2，3，5的起始索引都为0
+		        list1 = [1]; num2 = 0; num3 = 0; num5 = 0
+		        while len(list1) < index:
+					#首次生成的值为2，3，5
+		            val = min([list1[num2]*2,list1[num3]*3,list1[num5]*5])
+					#当2，3，5中2位最小值的时候，2的索引就要加1，因为1已经不是2的最小值的，3和5同理
+		            if val == list1[num2]*2:num2+=1
+		            if val == list1[num3]*3:num3+=1
+		            if val == list1[num5]*5:num5+=1
+					#每轮循环存一个值
+		            list1.append(val)
+		        return list1[index-1]
+		s = Solution()
+		res = s.GetUglyNumber_Solution(1500)
+		print(res)
+

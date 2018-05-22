@@ -1,0 +1,94 @@
+---
+layout:     post
+title:      "蛇形矩阵"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-04-22 19:00:00
+author:     "suny"
+catalog: false
+categories: Algorithms
+tags:
+    - 笔记
+---
+
+**对矩阵进行扒皮递归操作**
+
+python测试代码
+
+				# -*- coding:utf-8 -*-
+				class Solution:
+				    def __init__(self):
+				        self.list1 = []
+				    #矩阵降维成列表
+				    def ravel(self,matrix):
+				        list1 = []
+				        for i in range(len(matrix)):
+				            for j in range(len(matrix[0])):
+				                list1.append(matrix[i][j])
+				        return list1
+				    #列表升维成矩阵
+				    def hi_dim(self,arr,row,col):
+				        if arr == []:
+				            return []
+				        matrix = []
+				        k = 0
+				        for i in range(row):
+				            matrix.append([])
+				            for j in range(col):
+				                matrix[i].append(arr[k])
+				                k+=1
+				        return matrix
+				    def printMatrix(self, matrix):
+				        #当矩阵为空的时候返回蛇形矩阵列表
+				        if len(matrix)==0:
+				            return self.list1
+				        #特殊情况直接得结果
+				        if len(matrix[0]) == 1:
+				            for i in range(len(matrix)):
+				                for j in range(len(matrix[0])):
+				                    self.list1.append(matrix[i][0])
+				            return self.list1
+				        if len(matrix) == 1:
+				            for i in matrix[0]:
+				                self.list1.append(i)
+				            return self.list1
+				        list1 = self.ravel(matrix)
+				        i = 0
+				        #矩阵最外边一圈的数
+				        while not (i>len(matrix[0])-1 or i<0):
+				            self.list1.append(matrix[0][i])
+				            i+=1
+				        i = 0
+				        while not (i>len(matrix)-1 or i<0):
+				            self.list1.append(matrix[i][len(matrix[0])-1])
+				            i += 1
+				        i = len(matrix[0])-1
+				        while not (i>len(matrix[0])-1 or i<0):
+				            self.list1.append(matrix[len(matrix)-1][i])
+				            i-=1
+				        i = len(matrix)-1
+				        while not (i>len(matrix)-1 or i<0):
+				            self.list1.append(matrix[i][0])
+				            i-=1
+				        temp = []
+				        #最外圈的数进行去重处理
+				        for i in self.list1:
+				            if i not in temp:
+				                temp.append(i)
+				        self.list1 = temp
+				        #删除原降维后的矩阵中最外圈的所有数
+				        for i in self.list1:
+				            if i in list1:
+				                list1.remove(i)
+				        #对删除最外圈所有数的列表升维成矩阵 （col-2）x（row-2）
+				        matrix = self.hi_dim(list1,len(matrix)-2,len(matrix[0])-2)
+				        #对扒皮后的矩阵进行递归
+				        self.printMatrix(matrix)
+				        return self.list1
+				matrix = [[1,2,3,4],
+				          [5,6,7,8],
+				          [9,10,11,12],
+				          [13,14,15,16],
+				          [117,18,19,20]]
+				s = Solution()
+				list1 = s.printMatrix(matrix)
+				print(list1)
