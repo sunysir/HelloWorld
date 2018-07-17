@@ -1,4 +1,4 @@
-。---
+---
 layout:     post
 title:      "suny"
 subtitle:   " \"Hello World, Hello Blog\""
