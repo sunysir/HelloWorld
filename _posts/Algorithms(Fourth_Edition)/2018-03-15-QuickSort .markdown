@@ -1,4 +1,4 @@
-w---
+---
 layout:     post
 title:      "快速排序"
 subtitle:   " \"Hello World, Hello Blog\""
