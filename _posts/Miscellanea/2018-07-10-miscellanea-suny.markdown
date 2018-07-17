@@ -20,7 +20,7 @@ tags:
 - 微信：sunyang317117
 - Email：a94190253@gmail.com
 - 博客：<a href="https://www.sunysir.com">https://www.sunysir.com</a>
-- Github: <a href="https://github.com/sunysir>">https://github.com/sunysir</a>
+- Github: <a href="https://github.com/sunysir">https://github.com/sunysir</a>
 
 ### 开发技术
 
