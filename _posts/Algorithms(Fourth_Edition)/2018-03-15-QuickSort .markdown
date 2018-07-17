@@ -1,4 +1,4 @@
----
+w---
 layout:     post
 title:      "快速排序"
 subtitle:   " \"Hello World, Hello Blog\""
@@ -44,7 +44,7 @@ python代码
 		   arr[lo] = arr[high]
 		   while low < high and base > arr[low]:
 		       low += 1
-		   arr[high] = arr[lo]
+		   arr[high] = arr[low]
 	       arr[low] = base
 	       return low
 
