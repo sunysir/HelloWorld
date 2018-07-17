@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "suny简历"
+title:      "suny"
 subtitle:   " \"Hello World, Hello Blog\""
 date:       2018-07-10 11:00:00
 author:     "suny"
