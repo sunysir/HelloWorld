@@ -37,12 +37,15 @@ python代码
 	
 	
 	   def sort(self, low, high, arr):
+	       base = arr[low]
 	       while low < high:
-	           if arr[low] >= arr[high]:
-	               self.change(low, high, arr)
-	               high-=1
-	           else:
-	               low+=1
+		   while low < high and base < arr[high]:
+		       hi -= 1
+		   arr[lo] = arr[high]
+		   while low < high and base > arr[low]:
+		       low += 1
+		   arr[high] = arr[lo]
+	       arr[low] = base
 	       return low
 
       
