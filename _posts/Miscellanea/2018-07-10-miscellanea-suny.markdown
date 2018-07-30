@@ -32,7 +32,7 @@ tags:
 
 ### 项目经验
 - Django+xadmin仿慕课网开发
-  - 项目网址： <a href="http://sunysir.s1.natapp.cc">http://sunysir.s1.natapp.cc</a>    <a href="https://github.com/sunysir/Django-1.10-xadmin-mooc">github：https://github.com/sunysir/Django-1.10-xadmin-mooc</a>
+  - 项目网址： <a href="http://sunysir.pythonanywhere.com/">http://sunysir.pythonanywhere.com/</a>    <a href="https://github.com/sunysir/Django-1.10-xadmin-mooc">github：https://github.com/sunysir/Django-1.10-xadmin-mooc</a>
 - Django博客开发
   - 通过创建ORM关系模型实现显示详情页，分类，归档，标签后端逻辑
   - 使用自定义模板标签templatetags实现博客右侧归档，标签的显示
