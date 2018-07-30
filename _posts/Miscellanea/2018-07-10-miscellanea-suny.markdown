@@ -31,7 +31,8 @@ tags:
 - 常用工具：navicat，Git，Postman
 
 ### 项目经验
-
+- Django博客开发
+  - 项目网址： http://sunysir.s1.natapp.cc    github：https://github.com/sunysir/Django-1.10-xadmin-mooc
 - Django博客开发
   - 通过创建ORM关系模型实现显示详情页，分类，归档，标签后端逻辑
   - 使用自定义模板标签templatetags实现博客右侧归档，标签的显示
